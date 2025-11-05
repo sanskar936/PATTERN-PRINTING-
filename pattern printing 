@@ -1,0 +1,65 @@
+#include <stdio.h>
+
+int main() {
+    int i, j, k, n;
+    
+    // 1. Right-angle triangle with numbers
+    printf("Right-angle triangle with numbers:\n");
+    n = 4;
+    for(i = 1; i <= n; i++) {
+        for(j = 1; j <= i; j++) {
+            printf("%d ", j);
+        }
+        printf("\n");
+    }
+
+    // 2. Diamond shape with numbers
+    printf("\nDiamond shape with numbers:\n");
+    n = 4;
+    // upper half
+    for(i = 1; i <= n; i++) {
+        for(j = i; j < n; j++)
+            printf(" ");
+        for(j = 1; j <= i; j++)
+            printf("%d", j);
+        for(j = i - 1; j >= 1; j--)
+            printf("%d", j);
+        printf("\n");
+    }
+    // lower half
+    for(i = n - 1; i >= 1; i--) {
+        for(j = n; j > i; j--)
+            printf(" ");
+        for(j = 1; j <= i; j++)
+            printf("%d", j);
+        for(j = i - 1; j >= 1; j--)
+            printf("%d", j);
+        printf("\n");
+    }
+
+    // 3. Pyramid with asterisks
+    printf("\nPyramid with asterisks:\n");
+    n = 5;
+    for(i = 1; i <= n; i++) {
+        for(j = i; j < n; j++)
+            printf(" ");
+        for(k = 1; k <= (2 * i - 1); k++)
+            printf("*");
+        printf("\n");
+    }
+
+    // 4. Pyramid using alphabets
+    printf("\nPyramid using alphabets:\n");
+    n = 4;
+    for(i = 1; i <= n; i++) {
+        for(j = i; j < n; j++)
+            printf(" ");
+        for(j = 0; j < i; j++)
+            printf("%c", 'A' + j);
+        for(j = i - 2; j >= 0; j--)
+            printf("%c", 'A' + j);
+        printf("\n");
+    }
+
+    return 0;
+}
