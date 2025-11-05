@@ -1,0 +1,19 @@
+#include<stdio.h>
+
+void main() {
+    int n, stack[100], top = -1;
+
+    printf("Enter a decimal number: ");
+    scanf("%d", &n);
+
+    // Push remainders onto stack
+    while(n > 0) {
+        stack[++top] = n % 2;
+        n /= 2;
+    }
+
+    printf("Binary: ");
+    // Pop and print
+    while(top >= 0)
+        printf("%d", stack[top--]);
+}
