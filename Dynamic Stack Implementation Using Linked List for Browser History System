@@ -1,0 +1,79 @@
+#include <stdio.h>
+#include <stdlib.h>
+typedef struct Node{
+    char page[100];         // page title or URL
+    struct Node* next;
+}Node;
+Node* top=NULL;
+//Push page on stack
+void push(){
+    Node* nw = (Node*)malloc(sizeof(Node));
+    if(nw==NULL){   // expanded form of !ptr
+        printf("Memory allocation failed!\n");
+        return;
+    }
+    printf("Enter page name/URL: ");
+    scanf(" %[^\n]",nw->page); // reads string with spaces too
+    nw->next=top;
+    top=nw;
+    printf("Page '%s' added to history.\n", nw->page);
+}
+//Pop page from stack
+void pop(){
+    if(top == NULL){   // expanded form
+        printf("No history available (Stack empty).\n");
+        return;
+    }
+    Node* temp=top;
+    printf("Going back from '%s'\n",top->page);
+    top=top->next;
+    free(temp);
+}
+//Display the stack (history)
+void display(){
+    if(top==NULL){   // expanded form
+        printf("History is empty.\n");
+        return;
+    }
+    printf("\nBrowser History (Most Recent First):\n");
+    Node* current=top;
+    while(current!=NULL){
+        printf("%s\n",current->page);
+        current=current->next;
+    }
+}
+// Function to free all remaining nodes at exit
+void clearHistory(){
+    Node* current=top;
+    while(current!=NULL){
+        Node* temp=current;
+        current=current->next;
+        free(temp);
+    }
+    top=NULL;
+}
+//Main Function
+int main(){
+    int choice;
+    do{
+        printf("\n--- Browser History Menu ---\n");
+        printf("1. Visit a new page (Push)\n");
+        printf("2. Go back (Pop)\n");
+        printf("3. View history (Display)\n");
+        printf("4. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d",&choice);
+        switch (choice){
+            case 1: push(); break;
+            case 2: pop(); break;
+            case 3: display(); break;
+            case 4:
+                clearHistory();
+                printf("Exit\n");
+                break;
+            default: printf("Invalid choice!\n");
+        }
+    }while (choice != 4);
+    return 0;
+}
+
